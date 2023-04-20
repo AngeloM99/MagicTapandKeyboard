@@ -867,8 +867,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2968.0,
-            "y": 786.0,
+            "x": 3014.0,
+            "y": 787.3333129882813,
             "width": 127.33349609375,
             "height": 34.0
         }
@@ -2510,11 +2510,11 @@
     },
     "m_Name": "Emission",
     "m_DefaultReferenceName": "Color_619519269ab54f859f9ee6a4572399b3",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_EmissionColor",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "hlslDeclarationOverride": 2,
     "m_Hidden": false,
     "m_Value": {
         "r": 0.0,
