@@ -1,16 +1,15 @@
-using Microsoft.MixedReality.Toolkit;
-using Microsoft.MixedReality.Toolkit.Build.Editor;
-using Oculus.Interaction.Samples;
+
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using static Facebook.WitAi.WitTexts;
 
 public class S1Clock: MonoBehaviour
 {
+    public AcceStimulate acce;
+    public Bounds BallBound;
+
     [Header("This script is to control the behaviour of the counter and the clock")]
     public Transform clockTransform;
     public TextMeshProUGUI ClockText, PerformedActionText, PerformedActionNum, HintText;
@@ -22,24 +21,27 @@ public class S1Clock: MonoBehaviour
     public string KeepStill = "Please Keep Still";
     public string MoveAway = "Please Move Away";
     public string insertion = "Press the bubble";
+    public string warning = "Move back to continue";
 
     [Space]
     public bool PrematureExit = false;
 
-    private UnityEvent CountCompleteEvent;
+    public UnityEvent CountCompleteEvent;
 
     [Space]
     public int Count = 0;
     public float CountdownTime = 5.0f;
+    public float CT = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
+        acce = GetComponentInParent<AcceStimulate>();
+        BallBound = GetComponentInParent<Collider>().bounds;
         CapsuleMaterial = clockTransform.Find("Capsule").GetComponent<Renderer>().material;
         //StartCoroutine(CountdownCoroutine());
         CountCompleteEvent ??= new UnityEvent();
         //CountCompleteEvent.AddListener(CountUpdate);
         setBubbleColor(DisplayBubbleInactiveColor);
-
     }
 
     // Update is called once per frame
@@ -74,44 +76,66 @@ public class S1Clock: MonoBehaviour
 
     public void StartCountdown()
     {
-        StartCoroutine(CountdownCoroutine());
+        StartCoroutine("CountdownCoroutine");
     }
 
     public void StopCountDown()
     {
-        StopCoroutine(CountdownCoroutine());
+        StopCoroutine("CountdownCoroutine");
     }
 
     public IEnumerator CountdownCoroutine()
     {
-        float timer = CountdownTime;
+        ResetStates();
+
+        float timer = CT;
         setBubbleColor(DisplayBubbleActiveColor);
 
-        while (timer >= 0)
+        while (timer > 0 && PrematureExit == false)
         {
+            CountdownTime = timer;
             HintText.text = KeepStill;
             // update the text with the current timer value
             ClockText.text = timer.ToString("F2");
+            timer -= Time.deltaTime;
 
             // wait for one frame
             yield return null;
 
             // decrement the timer by delta time
-            timer -= Time.deltaTime;
         }
-        // countdown finished, update the text to show "0"
-        setBubbleColor(Color.green);
-        setTextColor(Color.green);
-        ClockText.text = "0.00";
-        HintText.text = MoveAway;
-        CountCompleteEvent.Invoke();
+        if (timer < 0.1f)
+        {
+            StopCoroutine("CountdownCoroutine");
+            OnSucceed();
+        }
 
+        CountCompleteEvent.Invoke();
+    }
+
+    public void OnSucceed()
+    {
+        if (PrematureExit == false)
+        {
+            setBubbleColor(Color.green);
+            setTextColor(Color.green);
+            ClockText.text = "0.00";
+            HintText.text = MoveAway;
+        }
+    }
+
+    public void Warning()
+    {
+        HintText.text = warning;
+        setBubbleColor(Color.red);
+        ClockText.color = Color.red;
+        setTextColor(Color.red);
     }
 
     public void ResetStates()
     {
         setBubbleColor(DisplayBubbleInactiveColor);
-        float timer = CountdownTime;
+        float timer = CT;
         ClockText.text = timer.ToString("F2");
         setBubbleColor(Color.grey);
         setTextColor(Color.white);

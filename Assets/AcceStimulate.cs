@@ -170,7 +170,6 @@ public class AcceStimulate : MonoBehaviour
                 if (!Invoked)
                 {
                     InEvent.Invoke();
-                    InEvent_Bool.Invoke(false);
                 }
                 // Change Outlo
                 if (!CloseSti && !HighLighted)

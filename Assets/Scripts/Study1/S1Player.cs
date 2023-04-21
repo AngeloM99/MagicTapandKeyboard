@@ -1,9 +1,4 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using VRKeys;
-using static UnityEditor.Experimental.GraphView.Port;
 
 public class S1Player : MonoBehaviour
 {

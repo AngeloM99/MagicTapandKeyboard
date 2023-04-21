@@ -1,18 +1,5 @@
-using JetBrains.Annotations;
-using Microsoft.MixedReality.Toolkit;
-using Microsoft.MixedReality.Toolkit.Experimental.Physics;
-using Microsoft.MixedReality.Toolkit.Input;
-using Microsoft.MixedReality.Toolkit.Utilities;
-using Oculus.Interaction;
-using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
-using UnityEngine.Networking.Types;
-using UnityEngine.Purchasing;
-using UnityEngine.Rendering.UI;
-using UnityEngine.Rendering.Universal;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class Constraint : MonoBehaviour
 {
