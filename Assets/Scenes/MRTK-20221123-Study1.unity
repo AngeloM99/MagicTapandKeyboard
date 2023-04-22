@@ -27081,7 +27081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  MaxCount: 5
+  MaxCount: 10
   TaskNum: 1
   coolDown: 1
   acce: {fileID: 0}
