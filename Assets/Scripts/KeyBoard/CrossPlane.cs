@@ -38,11 +38,11 @@ public class CrossPlane : MonoBehaviour
     public Vector3 TriggerBoundCenter;
 
     // Get Script Class
-    public AcceStimulate Acce;
+    [Space(50)]
+    public AcceStimulateForKeyboard  Acce;
     public GetText gt;
 
     // HandTracking Parameters
-    [Space(10)]
     [Header("Hand Tracking Parameters")]
     public Handedness handedness = Handedness.Any;
     public MixedRealityPose FingerTipPreviousPos;
@@ -58,9 +58,8 @@ public class CrossPlane : MonoBehaviour
     {
         KeyButton = gameObject;
         triggeredButtonText = KeyButton.name;
-        Acce = GetComponent<AcceStimulate>();
+        Acce = GetComponent<AcceStimulateForKeyboard>();
         gt = gameObject.GetComponent<GetText>();
-
 
         Trigger = KeyButton.transform.Find("Trigger").gameObject;
 
@@ -85,21 +84,25 @@ public class CrossPlane : MonoBehaviour
 
         Acce.OutEvent.AddListener(() =>
         {
+            InEventTriggered = false;
             OutEventTriggered = true;
+            HesEventTriggered = false;
         });
 
         EnterEvent.AddListener(() =>
         {
+            ExitEventTriggered = false;
             EnterEventTriggered = true;
         });
 
         ExitEvent.AddListener(() =>
         {
-            if (EnterEventTriggered == true && InEventTriggered == true && Acce.CloseSti != true)
+            if (EnterEventTriggered == true && InEventTriggered == true)
             {
                 gt.UpdateDisplay();
             }
             ExitEventTriggered = true;
+            EnterEventTriggered = false;
         });
     }
 
@@ -135,6 +138,7 @@ public class CrossPlane : MonoBehaviour
 
                     if (InEventTriggered)
                     {
+                        print("In Event set false");
                         InEventTriggered = false;
                         crossed = false;
                     }

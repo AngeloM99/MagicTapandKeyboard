@@ -24,9 +24,9 @@ public class S1SetVariableForKeyboard : MonoBehaviour
         if (root.transform.childCount == 0) return;
         foreach (Transform t in root.transform)
         {
-            AcceStimulate acce;
+            AcceStimulateForKeyboard acce;
             S1AccModeForKeyboard sam;
-            acce = t.GetComponent<AcceStimulate>();
+            acce = t.GetComponent<AcceStimulateForKeyboard>();
             sam = t.GetComponent<S1AccModeForKeyboard>();
             if (acce != null && sam != null)
             {

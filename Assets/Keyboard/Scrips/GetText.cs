@@ -11,7 +11,7 @@ public class GetText : MonoBehaviour
 {
     // Get KeyboardButtons here
     public GameObject KeyboardButton;
-
+    public bool HighlightedKey;
     #region special Keys 
 
     // InputKeys
@@ -33,14 +33,12 @@ public class GetText : MonoBehaviour
 
     public TextMeshPro ButtonText;
 
-    public AcceStimulate acce;
+    public AcceStimulateForKeyboard acce;
 
     string objectName, inputString;
     // Start is called before the first frame update
     void Start()
     {
-        List<GameObject> SpecialKeysCollection = new List<GameObject> {
-            ShiftKey};
 
         #region Get Special Keys
 
@@ -67,12 +65,13 @@ public class GetText : MonoBehaviour
 
         if (gameObject.name == "2_left_upcase" || gameObject.name == "2_right_upcase")
         {
+            HighlightedKey = true;
             ShiftKey = gameObject;
         }
 
         #endregion
 
-        acce = GetComponent<AcceStimulate>();
+        acce = GetComponent<AcceStimulateForKeyboard>();
         KeyboardButton = gameObject;
         Txtinput = textbox.GetComponent<Textinput>();
 
@@ -147,6 +146,14 @@ public class GetText : MonoBehaviour
         {
             string ButtonTextLowerCase = ButtonText.text.ToLower();
             ButtonText.text = ButtonTextLowerCase;
+        }
+    }
+
+    public void DeleteKeyBehavior()
+    {
+        if (textUpdate.text.Length > 0)
+        {
+            textUpdate.text = textUpdate.text.Substring(0, textUpdate.text.Length - 1);
         }
     }
 

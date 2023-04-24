@@ -7,7 +7,7 @@ using UnityEngine.Rendering;// For all, Out-Enter-Out will have material change 
 // This set of code is design ONLY for keyboard.
 public class S1AccModeForKeyboard : MonoBehaviour
 {
-    public AcceStimulate Acce;
+    public AcceStimulateForKeyboard Acce;
     // public S1Player Player;
     public GetText Text;
     //public CancelRainbow CancelR;
@@ -18,7 +18,7 @@ public class S1AccModeForKeyboard : MonoBehaviour
     public S1SetVariableForKeyboard ssv;
     private void Start()
     {
-        Acce = gameObject.GetComponent<AcceStimulate>();
+        Acce = gameObject.GetComponent<AcceStimulateForKeyboard>();
         Text = gameObject.GetComponent<GetText>();
         ParentObject = transform.parent.gameObject;
         ssv = ParentObject.GetComponent<S1SetVariableForKeyboard>();
