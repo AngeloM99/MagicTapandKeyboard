@@ -84,8 +84,9 @@ public class CrossPlane : MonoBehaviour
 
         Acce.OutEvent.AddListener(() =>
         {
-            InEventTriggered = false;
             OutEventTriggered = true;
+
+            InEventTriggered = false;
             HesEventTriggered = false;
         });
 
@@ -138,7 +139,7 @@ public class CrossPlane : MonoBehaviour
 
                     if (InEventTriggered)
                     {
-                        print("In Event set false");
+                        //print("In Event set false");
                         InEventTriggered = false;
                         crossed = false;
                     }
@@ -189,7 +190,7 @@ public class CrossPlane : MonoBehaviour
             BoundTriggered = true;
             if (CurrentFramePos > 0 && CurrentFramePos > PreviousFramePos && PreviousFramePos < 0)
             {
-                print("Enter");
+                //print("Enter");
                 EnterEvent.Invoke();
             }
         }
@@ -203,7 +204,7 @@ public class CrossPlane : MonoBehaviour
         {
             if (CurrentFramePos < 0 && CurrentFramePos < PreviousFramePos && PreviousFramePos > 0)
             {
-                print("Exit");
+                //print("Exit");
                 ExitEvent.Invoke();
             }
         }

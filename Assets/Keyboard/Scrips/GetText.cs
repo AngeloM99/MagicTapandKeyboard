@@ -97,7 +97,7 @@ public class GetText : MonoBehaviour
     {
         if (gameObject == DeleteKey)
         {
-            DeleteBehavior.TriggerDelete();
+            DeleteKeyBehavior();
         }
         else if (gameObject == SpaceBar)
         {

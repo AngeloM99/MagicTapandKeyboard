@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MRTK-20221112-Keyboard.unity
     guid: 3ecb902b5b4f45b47886b38667267bb8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MRTK-20221123-Study1.unity
     guid: a29e3526062243546b9d249abdb323a0
   - enabled: 0
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/feedbackProtu.unity
     guid: 783e9a23dca4e7341b20ae0f9d04d514
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/keyboard/KeyboardS.unity
     guid: ef4265ab0775e4e4ab1aa1763c0a87e3
   - enabled: 0

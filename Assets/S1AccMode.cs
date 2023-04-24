@@ -5,13 +5,13 @@ using UnityEngine.Rendering;
 // For all, Out-Enter-Out will have material change be like Out-in-out coded in AcceStimulate.cs
 public class S1AccMode : MonoBehaviour
 {
-    public AcceStimulateForKeyboard Acce;
+    public AcceStimulate Acce;
     public S1Player Player;
     //public Material HesMaterial;
     //public CancelRainbow CancelR;
     public void Start()
     {
-        Acce = GetComponent<AcceStimulateForKeyboard>();
+        Acce = GetComponent<AcceStimulate>();
         Player = GetComponentInChildren<S1Player>();
     }
     public void SetHesMode()

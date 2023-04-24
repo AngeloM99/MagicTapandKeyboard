@@ -22,9 +22,9 @@ public class S1SetVariableFeedbackPrototype : MonoBehaviour
         if (root.transform.childCount == 0) return;
         foreach (Transform t in root.transform)
         {
-            AcceStimulateForKeyboard acce;
+            AcceStimulate acce;
             S1AccMode sam;
-            acce = t.GetComponent<AcceStimulateForKeyboard>();
+            acce = t.GetComponent<AcceStimulate>();
             sam = t.GetComponent<S1AccMode>();
             if (acce != null && sam != null)
             {

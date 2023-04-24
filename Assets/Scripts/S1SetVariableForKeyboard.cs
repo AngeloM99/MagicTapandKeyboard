@@ -37,8 +37,8 @@ public class S1SetVariableForKeyboard : MonoBehaviour
     }
     public void SetMaterial(GameObject root)
     {
-        AcceStimulate acce;
-        acce = root.GetComponent<AcceStimulate>();
+        AcceStimulateForKeyboard acce;
+        acce = root.GetComponent<AcceStimulateForKeyboard>();
         
         if (acce != null)
         {
@@ -54,8 +54,8 @@ public class S1SetVariableForKeyboard : MonoBehaviour
 
     public void SetMode(GameObject root)
     {
-        AcceStimulate acce;
-        acce = root.GetComponent<AcceStimulate>();
+        AcceStimulateForKeyboard acce;
+        acce = root.GetComponent<AcceStimulateForKeyboard>();
         if (acce != null)
         {
             SetAcce(acce);
@@ -67,7 +67,7 @@ public class S1SetVariableForKeyboard : MonoBehaviour
         }
     }
 
-    public void SetAcce(AcceStimulate tas)
+    public void SetAcce(AcceStimulateForKeyboard tas)
     {
         //Debug.LogFormat("{0}: setacce", tas.gameObject.name);
         tas.Delay = Long;

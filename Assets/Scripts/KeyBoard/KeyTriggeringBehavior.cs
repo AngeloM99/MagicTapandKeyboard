@@ -76,6 +76,11 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
         Utilities.cp.EnterEvent.AddListener(OnEntering);
         Utilities.acce.OutEvent.AddListener(OnOut);
+        Utilities.acce.HesEvent.AddListener(() =>
+        {
+            Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
+        });
+        Utilities.cp.ExitEvent.AddListener(OnExit);
     }
 
     public void OnEntering()
@@ -98,6 +103,21 @@ public class KeyTriggeringBehavior : MonoBehaviour
     public void OnOut()
     {
         Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
+    }
+
+    public void OnExit()
+    {
+        if (Utilities.cp.HesEventTriggered == false)
+        {
+            print("1");
+            if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
+            {
+                print("2");
+                Utilities.gt.UpdateDisplay();
+            }
+        }
+        Utilities.cp.ExitEventTriggered = true;
+        Utilities.cp.EnterEventTriggered = false;
     }
 
     // Update is called once per frame

@@ -22,17 +22,11 @@ public class S1AccModeForKeyboard : MonoBehaviour
         Text = gameObject.GetComponent<GetText>();
         ParentObject = transform.parent.gameObject;
         ssv = ParentObject.GetComponent<S1SetVariableForKeyboard>();
-
-        if(ssv.FastForKeyboard == true)
-        {
-            ParentObjectParent = ParentObject.transform.parent.gameObject;
-            TriggerPlane = ParentObjectParent.transform.Find("TriggeringPlane").gameObject;
-            cp = TriggerPlane.GetComponent<CrossPlane>();
-        }
     }
 
     public void SetKeyboardFastTapMode()
     {
+        print("SetkeyboardFastModeActive");
         Acce.HesEvent.AddListener(Acce.OutMaterial);
         Acce.HesEvent.AddListener(Acce.OpenCloseSti); // CloseSti set to be false after out
         // tp.ExitEvent.AddListener(Text.UpdateDisplay);
@@ -54,6 +48,7 @@ public class S1AccModeForKeyboard : MonoBehaviour
     }
     public void SetFastMode()
     {
+
         Acce.OutEvent.AddListener(DebugOutput);
         Acce.HesEvent.AddListener(Acce.OutMaterial);
         Acce.HesEvent.AddListener(Acce.OpenCloseSti); // CloseSti set to be false after out
