@@ -29,7 +29,7 @@ public class CrossPlane : MonoBehaviour
         ExitEventTriggered = false,
         BoundTriggered = false;
     // Create UnityEvent to hear the Exit and entering of line
-    public UnityEvent EnterEvent, ExitEvent;
+    public UnityEvent EnterEvent, ExitEvent, InCancelZoneTrigger, OutCancelZoneTrigger;
 
     // Get GameObject and Collider
     public GameObject KeyButton, Trigger;
@@ -53,9 +53,17 @@ public class CrossPlane : MonoBehaviour
     public float FingerTipPreviousZ;
     public float FingerTipCurrentZ;
 
+    public GameObject keyboardBoundingBox;
+    public Bounds KeyboardBounds;
+    public bool WithinCancelZone = true;
+
+    public Vector3 FingertipPreviousConv;
+    public Vector3 FingertipCurrentConv;
+
     // Start is called before the first frame update
     void Start()
     {
+        KeyboardBounds = keyboardBoundingBox.GetComponent<Collider>().bounds;
         KeyButton = gameObject;
         triggeredButtonText = KeyButton.name;
         Acce = GetComponent<AcceStimulateForKeyboard>();
@@ -73,7 +81,7 @@ public class CrossPlane : MonoBehaviour
 
         Acce.InEvent.AddListener(() =>
         {
-            print(triggeredButtonText);
+            //print(triggeredButtonText);
             InEventTriggered = true;
         });
 
@@ -85,8 +93,6 @@ public class CrossPlane : MonoBehaviour
         Acce.OutEvent.AddListener(() =>
         {
             OutEventTriggered = true;
-
-            InEventTriggered = false;
             HesEventTriggered = false;
         });
 
@@ -102,6 +108,7 @@ public class CrossPlane : MonoBehaviour
             {
                 gt.UpdateDisplay();
             }
+            InEventTriggered = false;
             ExitEventTriggered = true;
             EnterEventTriggered = false;
         });
@@ -116,6 +123,7 @@ public class CrossPlane : MonoBehaviour
         }
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out FingerTipCurrentPos))
         {
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexDistalJoint, Handedness.Any, out IndexDistalPose);
             if (init)
             {
                 init = false;
@@ -123,13 +131,14 @@ public class CrossPlane : MonoBehaviour
                 return;
             }
 
-            Vector3 FingertipPreviousConv = MatrixConversion(FingerTipPreviousPos);
-            Vector3 FingertipCurrentConv = MatrixConversion(FingerTipCurrentPos);
+            FingertipPreviousConv = MatrixConversion(FingerTipPreviousPos);
+            FingertipCurrentConv = MatrixConversion(FingerTipCurrentPos);
             FingerTipPreviousZ = FingertipPreviousConv.z;
             FingerTipCurrentZ = FingertipCurrentConv.z;
 
             if (FingerTipCurrentZ != FingerTipPreviousZ)
             {
+                CheckInsideKeyboardBounds(FingerTipCurrentPos.Position, FingerTipPreviousPos.Position);
                 EnterCrossPlaneChecker(FingerTipCurrentZ, FingerTipPreviousZ);
                 ExitCrossPlaneChecker(FingerTipCurrentZ, FingerTipPreviousZ);
                 if (crossed == true)
@@ -154,6 +163,7 @@ public class CrossPlane : MonoBehaviour
             /// Make sure any functions should be written before this.
             /// Or Two frames will be the same.
             FingerTipPreviousPos = FingerTipCurrentPos;
+            HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out FingerTipCurrentPos);
             HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexDistalJoint, Handedness.Any, out IndexDistalPose);
         }
 
@@ -164,6 +174,14 @@ public class CrossPlane : MonoBehaviour
     /// </summary>
     /// <param name="Pos"> Input position data here to start matrix transformatio. </param>
     /// <returns></returns>
+
+    public void CheckInsideKeyboardBounds(Vector3 CurrentFramePos, Vector3 PreviousFramePos)
+    {
+        if (KeyboardBounds.Contains(CurrentFramePos) || KeyboardBounds.Contains(PreviousFramePos))
+        {
+            OutCancelZoneTrigger.Invoke();
+        }
+    }
 
     public Vector3 MatrixConversion(MixedRealityPose Pos)
     {
@@ -200,13 +218,11 @@ public class CrossPlane : MonoBehaviour
     {
         TriggerBound = TriggerCollider.bounds;
 
-        if(TriggerBound.Contains(FingerTipCurrentPos.Position) || TriggerBound.Contains(IndexDistalPose.Position))
+        if (CurrentFramePos < 0 && CurrentFramePos < PreviousFramePos && PreviousFramePos > 0)
         {
-            if (CurrentFramePos < 0 && CurrentFramePos < PreviousFramePos && PreviousFramePos > 0)
-            {
-                //print("Exit");
-                ExitEvent.Invoke();
-            }
+            //print("Exit");
+            ExitEvent.Invoke();
         }
+
     }
 }

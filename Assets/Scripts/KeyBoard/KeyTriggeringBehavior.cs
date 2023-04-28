@@ -55,6 +55,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
     [Space()]
     public bool init = false;
+    public bool InsideCancelZone = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +82,12 @@ public class KeyTriggeringBehavior : MonoBehaviour
             Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
         });
         Utilities.cp.ExitEvent.AddListener(OnExit);
+
+        Utilities.cp.OutCancelZoneTrigger.AddListener(() =>
+        {
+            print("OutCancelZone");
+            InsideCancelZone = false;
+        });
     }
 
     public void OnEntering()
@@ -102,19 +109,26 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
     public void OnOut()
     {
-        Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
     }
 
     public void OnExit()
     {
+
+        Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
+
+        print("Inside Cancel Zone");
         if (Utilities.cp.HesEventTriggered == false)
         {
-            print("1");
+            //print("1");
             if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
             {
-                print("2");
+                //print("2");
                 Utilities.gt.UpdateDisplay();
             }
+        }
+        if (InsideCancelZone == false)
+        {
+
         }
         Utilities.cp.ExitEventTriggered = true;
         Utilities.cp.EnterEventTriggered = false;

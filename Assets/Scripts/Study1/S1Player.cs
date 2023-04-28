@@ -34,7 +34,7 @@ public class S1Player : MonoBehaviour
         Color currentColor = OpaqueMat.GetColor("_BaseColor");
 
         // set the new alpha value of the color
-        currentColor.a = 0.2F;
+        currentColor.a = 1F;
 
         // set the modified color back to the material
         OpaqueMat.SetColor("_BaseColor", currentColor);

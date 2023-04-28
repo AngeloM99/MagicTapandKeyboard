@@ -27,6 +27,7 @@ public class S1AccMode : MonoBehaviour
 
         if (Player != null)
         {
+            print(1);   
             Acce.HesEvent.AddListener(Player.ChangeColor);
             Acce.InEvent.AddListener(Player.ChangeOpacity);
             Acce.OutEvent.AddListener(Player.SetOpacityBack);
