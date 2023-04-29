@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static KeyTriggeringBehavior;
 
 [Serializable]
@@ -11,6 +12,18 @@ public class VisualFeedbacks
 {
     public Material ActiveMaterial;
     public Material InactiveMaterial;
+}
+
+[Serializable]
+public class HintPlaneBehaviors
+{
+    public GameObject HintPlane;
+    public Renderer HintPlaneRenderer;
+    public Material HintPlaneMaterial;
+
+    public float FresnelPower;
+    public Color HintPlaneColor;
+    public float HintPlaneActivePower;
 }
 
 [Serializable]
@@ -24,7 +37,7 @@ public class KeyboardUtilities
 [Serializable]
 public class TextInputUtilities
 {
-    public TextMeshPro InputTextField;
+    public TextMeshProUGUI InputTextField;
     [SerializeField]
     public string InputText;
     public string ButtonText;
@@ -52,10 +65,10 @@ public class KeyTriggeringBehavior : MonoBehaviour
     public TextInputUtilities TextInput;
     public ButtonAttributes Attributes;
     public ScriptConstants Variables;
+    public HintPlaneBehaviors Hp;
 
     [Space()]
     public bool init = false;
-    public bool InsideCancelZone = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +86,16 @@ public class KeyTriggeringBehavior : MonoBehaviour
         // Get Text Utilities
         TextInput.InputText = TextInput.InputTextField.text;
 
+        // Get Hint Plane
+        Hp.HintPlaneRenderer = Hp.HintPlane.GetComponent<Renderer>();
+        Hp.HintPlaneMaterial = Hp.HintPlaneRenderer.material;
+        Hp.FresnelPower = Hp.HintPlaneMaterial.GetFloat("_FP");
+        Hp.HintPlaneColor = Hp.HintPlaneMaterial.GetVector("_EmissionColor");
+        Hp.HintPlaneActivePower = 0.2f;
+
         #endregion
+
+        Hp.HintPlane.SetActive(false);
 
         Utilities.cp.EnterEvent.AddListener(OnEntering);
         Utilities.acce.OutEvent.AddListener(OnOut);
@@ -86,7 +108,13 @@ public class KeyTriggeringBehavior : MonoBehaviour
         Utilities.cp.OutCancelZoneTrigger.AddListener(() =>
         {
             print("OutCancelZone");
-            InsideCancelZone = false;
+            Hp.HintPlaneMaterial.SetFloat("_FP", Hp.FresnelPower);
+        });
+
+        Utilities.cp.InCancelZoneTrigger.AddListener(() =>
+        {
+            print("InCancalZone");
+            Hp.HintPlaneMaterial.SetFloat("_FP", Hp.HintPlaneActivePower);
         });
     }
 
@@ -109,6 +137,10 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
     public void OnOut()
     {
+        if (Utilities.cp.ExitEventTriggered == false)
+        {
+            Hp.HintPlane.SetActive(true);
+        }
     }
 
     public void OnExit()
@@ -116,20 +148,21 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
         Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
 
-        print("Inside Cancel Zone");
-        if (Utilities.cp.HesEventTriggered == false)
+        if (Utilities.cp.WithinCancelZone == false)
         {
-            //print("1");
-            if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
+            if (Utilities.cp.HesEventTriggered == false)
             {
-                //print("2");
-                Utilities.gt.UpdateDisplay();
+                //print("1");
+                if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
+                {
+                    //print("2");
+                    Utilities.gt.UpdateDisplay();
+                }
             }
         }
-        if (InsideCancelZone == false)
-        {
 
-        }
+        Hp.HintPlane.SetActive(false);
+
         Utilities.cp.ExitEventTriggered = true;
         Utilities.cp.EnterEventTriggered = false;
     }

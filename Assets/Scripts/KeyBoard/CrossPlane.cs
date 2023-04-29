@@ -63,7 +63,6 @@ public class CrossPlane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        KeyboardBounds = keyboardBoundingBox.GetComponent<Collider>().bounds;
         KeyButton = gameObject;
         triggeredButtonText = KeyButton.name;
         Acce = GetComponent<AcceStimulateForKeyboard>();
@@ -117,7 +116,9 @@ public class CrossPlane : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(TriggerCollider != null)
+        KeyboardBounds = keyboardBoundingBox.GetComponent<Collider>().bounds;
+
+        if (TriggerCollider != null)
         {
             TriggerBound = TriggerCollider.bounds;
         }
@@ -136,9 +137,10 @@ public class CrossPlane : MonoBehaviour
             FingerTipPreviousZ = FingertipPreviousConv.z;
             FingerTipCurrentZ = FingertipCurrentConv.z;
 
+            CheckInsideKeyboardBounds(FingerTipPreviousPos.Position, FingerTipCurrentPos.Position);
+
             if (FingerTipCurrentZ != FingerTipPreviousZ)
             {
-                CheckInsideKeyboardBounds(FingerTipCurrentPos.Position, FingerTipPreviousPos.Position);
                 EnterCrossPlaneChecker(FingerTipCurrentZ, FingerTipPreviousZ);
                 ExitCrossPlaneChecker(FingerTipCurrentZ, FingerTipPreviousZ);
                 if (crossed == true)
@@ -179,7 +181,14 @@ public class CrossPlane : MonoBehaviour
     {
         if (KeyboardBounds.Contains(CurrentFramePos) || KeyboardBounds.Contains(PreviousFramePos))
         {
+            print("In");
             OutCancelZoneTrigger.Invoke();
+            WithinCancelZone = false;
+        }
+        else
+        {
+            InCancelZoneTrigger.Invoke();
+            WithinCancelZone = true;
         }
     }
 

@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class PalmToFace : MonoBehaviour
 {
-    public GameObject ForwardKeyboard, ReverseKeyboard;
+    public GameObject ForwardKeyboard, ReverseKeyboard, KeyboardPlane;
     // Start is called before the first frame update
     void Start()
     {
-
+        KeyboardPlane.SetActive(true);
         ForwardKeyboard.SetActive(true);
         ReverseKeyboard.SetActive(false);
     }
@@ -31,11 +31,13 @@ public class PalmToFace : MonoBehaviour
 
             if (angle > 100.0f)
             {
+                KeyboardPlane.SetActive(false);
                 ForwardKeyboard.SetActive(false);
                 ReverseKeyboard.SetActive(true);
             }
             else
             {
+                KeyboardPlane.SetActive(true);
                 ForwardKeyboard.SetActive(true);
                 ReverseKeyboard.SetActive(false);
             }

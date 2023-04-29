@@ -28,7 +28,7 @@ public class GetText : MonoBehaviour
 ///<param name="textUpdate">This is for updating the textbox</param>
 ///<param name="Txtinput">A shared string is needed to store all the input in a separate location to avoid the text being refreshed everytime we pressed the button</param>
     public GameObject textbox;
-    public TextMeshPro textUpdate;
+    public TextMeshProUGUI textUpdate;
     public Textinput Txtinput;
 
     public TextMeshPro ButtonText;
