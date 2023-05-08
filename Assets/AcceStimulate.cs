@@ -419,16 +419,18 @@ public class AcceStimulate : MonoBehaviour
                 return false;
             }
         }
-
-        print("Using Acceleration for condition C");
-        if (v > Vbc)
-        {
-            condition = 'C';
-            return true;
-        }
         else
         {
-            return false;
+            print("Using Acceleration for condition C");
+            if (v > Vbc)
+            {
+                condition = 'C';
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
