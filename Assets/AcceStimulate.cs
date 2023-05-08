@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.Diagnostics;
 using UnityEditor;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// Interaction control component for the six interaction methods.
@@ -45,6 +46,7 @@ using UnityEditor;
 /// <param name="Vb">Velocity bound for Acce and Velo mode's A condition</param>
 /// <param name="Vbc">Velocity bound for Acce and Velo mode's C condition</param>
 /// <param name="Ab">Acceleration bound for Acce mode's B condition</param>
+/// <param name="Abc">Acceleration bound for Acce mode's C condition</param>
 /// <param name="Vupper">Velocity bound for Acce mode's B condition</param>
 /// <param name="Hesitated">Bool set true if judged as hesitated</param>
 /// <param name="Init">Bool set true if component start its first calculation</param>
@@ -84,8 +86,11 @@ public class AcceStimulate : MonoBehaviour
     public Material OutMate, InMate, HLMate;
     public MeshRenderer meshRenderer;
     public S2SetVariable ParentSSV;
-    public float Distance; 
+    public float Distance;
 
+    // Set Condition C's bound to Acceleration instead of Velocity.
+    public bool useAcce = false;
+    public float AccelerationBoundForConditionC;
 
     void Start()
     {
@@ -401,6 +406,21 @@ public class AcceStimulate : MonoBehaviour
 
     public bool JudgeC()
     {
+        if (useAcce)
+        {
+            print("Using Acceleration for condition C");
+            if (a > AccelerationBoundForConditionC)
+            {
+                condition = 'C';
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        print("Using Acceleration for condition C");
         if (v > Vbc)
         {
             condition = 'C';

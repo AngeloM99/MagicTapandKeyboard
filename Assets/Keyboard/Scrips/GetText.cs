@@ -157,6 +157,10 @@ public class GetText : MonoBehaviour
         }
     }
 
+    public void PreEnteringText()
+    {
+    }
+
     #region Shift Key Behavior
 
     void ShiftKeyPressed()

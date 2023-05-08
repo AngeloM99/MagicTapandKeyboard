@@ -41,7 +41,6 @@ public class TextInputUtilities
     [SerializeField]
     public string InputText;
     public string ButtonText;
-    public string PreEnteringText;
 }
 
 [Serializable]
@@ -165,11 +164,5 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
         Utilities.cp.ExitEventTriggered = true;
         Utilities.cp.EnterEventTriggered = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
