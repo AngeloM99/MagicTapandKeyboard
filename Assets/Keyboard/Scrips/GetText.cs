@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.ProBuilder.MeshOperations;
 using VRKeys;
 using UnityEngine.Rendering.UI;
+using UnityEngine.Rendering;
 // using UnityEditor.Animations;
 
 public class GetText : MonoBehaviour
@@ -81,16 +82,20 @@ public class GetText : MonoBehaviour
             CaseControl("toLower");
         }
         // acce.InEvent.AddListener(PrintTextOnEnter);
-        // acce.InEvent.AddListener(UpdateDisplay);
+        // acce.InEvent.AddListener(InputStates);
     }
 
     // Update is called once per frame
 
-    /// <param name="Update Display">Update text to display, main funtion for Updating keys</param>
-    public void UpdateDisplay()
+    /// <summary>
+    /// InputStates only input a character into the text frame.
+    /// </summary>
+    /// <param name="States">Take three colors "grey", "red", "black"</param>
+    public void InputStates(string States = "grey")
     {
         GetKeyBindingText();
         textUpdate.text += inputString;
+        SetInputStringColor(States);
     }
 
     public void GetKeyBindingText()
@@ -156,11 +161,6 @@ public class GetText : MonoBehaviour
             textUpdate.text = textUpdate.text.Substring(0, textUpdate.text.Length - 1);
         }
     }
-
-    public void PreEnteringText()
-    {
-    }
-
     #region Shift Key Behavior
 
     void ShiftKeyPressed()
@@ -170,4 +170,28 @@ public class GetText : MonoBehaviour
 
     #endregion
 
+    public void SetInputStringColor(string InputStringColor = "grey")
+    {
+        // Initiate an empty color string.
+        string ColorCode = "<color=#9A9A9A>";
+        string modifiedText = textUpdate.text;
+        int lastCharIndex = modifiedText.Length - 1;
+
+        // Switch between state where there are three types of color state.
+        switch (InputStringColor)
+        {
+            case "grey":
+                ColorCode = "<color=#9A9A9A>";
+                break;
+            case "red":
+                ColorCode = "<color=#EC1717>";
+                break;            
+            case "black":
+                ColorCode = "<color=#2031C6>";
+                break;
+        }
+        modifiedText = modifiedText.Substring(0, lastCharIndex) +
+            ColorCode + modifiedText[lastCharIndex] + "</color>";
+        textUpdate.text = modifiedText;
+    }
 }

@@ -103,10 +103,10 @@ public class CrossPlane : MonoBehaviour
 
         ExitEvent.AddListener(() =>
         {
-            if (EnterEventTriggered == true && InEventTriggered == true)
-            {
-                gt.UpdateDisplay();
-            }
+            //if (EnterEventTriggered == true && InEventTriggered == true)
+            //{
+            //    gt.InputStates("black");
+            //}
             InEventTriggered = false;
             ExitEventTriggered = true;
             EnterEventTriggered = false;

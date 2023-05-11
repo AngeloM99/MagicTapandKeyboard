@@ -29,15 +29,21 @@ public class S1AccModeForKeyboard : MonoBehaviour
         print("SetkeyboardFastModeActive");
         Acce.HesEvent.AddListener(Acce.OutMaterial);
         Acce.HesEvent.AddListener(Acce.OpenCloseSti); // CloseSti set to be false after out
-        // tp.ExitEvent.AddListener(Text.UpdateDisplay);
-        Acce.OutEvent.AddListener(Text.UpdateDisplay); 
+        // tp.ExitEvent.AddListener(Text.InputStates);
+        Acce.OutEvent.AddListener(() =>
+        {
+            Text.InputStates("black");
+        }); 
     }
     public void SetHesMode()
     {
         Acce.OutEvent.AddListener(DebugOutput);
 
         Acce.BeforeHesEvent.AddListener(Acce.SetInvoked);
-        Acce.HesEvent.AddListener(Text.UpdateDisplay);
+        Acce.HesEvent.AddListener(() =>
+        {
+            Text.InputStates("black");
+        });
 
         Acce.HesEvent.AddListener(Acce.OutMaterial);
         Acce.HesEvent.AddListener(Acce.OpenCloseSti); // CloseSti set to be false after out
@@ -52,13 +58,16 @@ public class S1AccModeForKeyboard : MonoBehaviour
         Acce.OutEvent.AddListener(DebugOutput);
         Acce.HesEvent.AddListener(Acce.OutMaterial);
         Acce.HesEvent.AddListener(Acce.OpenCloseSti); // CloseSti set to be false after out
-        //Acce.OutEvent.AddListener(Text.UpdateDisplay);
-        //cp.ExitEvent.AddListener(Text.UpdateDisplay);
+        //Acce.OutEvent.AddListener(Text.InputStates);
+        //cp.ExitEvent.AddListener(Text.InputStates);
     }
     public void Set01Mode()
     {
         Acce.OutEvent.AddListener(DebugOutput);
-        Acce.InEvent.AddListener(Text.UpdateDisplay);
+        Acce.InEvent.AddListener(() =>
+        {
+            Text.InputStates("black");
+        });
 
         Acce.InEvent.AddListener(Acce.SetInvoked);
         Acce.InEvent.AddListener(Acce.OutMaterial);
@@ -69,7 +78,10 @@ public class S1AccModeForKeyboard : MonoBehaviour
     {
 
         Acce.OutEvent.AddListener(DebugOutput);
-        Acce.OutEvent.AddListener(Text.UpdateDisplay);
+        Acce.OutEvent.AddListener(() =>
+        {
+            Text.InputStates("black");
+        });
 
     }
 

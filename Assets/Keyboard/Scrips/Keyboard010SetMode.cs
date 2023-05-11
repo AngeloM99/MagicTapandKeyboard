@@ -41,7 +41,7 @@ public class Keyboard010SetMode : MonoBehaviour
                 print("010CancelMode");
 
                 Acce.HesEvent.AddListener(OpenActionBar);
-                //Acce.OutEvent.AddListener(GT.UpdateDisplay);
+                //Acce.OutEvent.AddListener(GT.InputStates);
                 Acce.OutEvent.AddListener(CloseActionBar);
 
                 ActionBarAcce.InEvent.AddListener(OpenCloseSti);
@@ -57,7 +57,7 @@ public class Keyboard010SetMode : MonoBehaviour
 
 
                 ActionBarAcce.InEvent.AddListener(OpenCloseSti);
-                //ActionBarAcce.InEvent.AddListener(GT.UpdateDisplay);
+                //ActionBarAcce.InEvent.AddListener(GT.InputStates);
                 ActionBarAcce.InEvent.AddListener(CloseActionBar);
                 ActionBarAcce.HesEvent.AddListener(UnInvokedAcce);
 

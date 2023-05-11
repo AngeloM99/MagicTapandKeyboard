@@ -96,6 +96,10 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
         Hp.HintPlane.SetActive(false);
 
+        Utilities.acce.InEvent.AddListener(()=>
+        {
+        });
+
         Utilities.cp.EnterEvent.AddListener(OnEntering);
         Utilities.acce.OutEvent.AddListener(OnOut);
         Utilities.acce.HesEvent.AddListener(() =>
@@ -114,6 +118,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
         {
             print("InCancalZone");
             Hp.HintPlaneMaterial.SetFloat("_FP", Hp.HintPlaneActivePower);
+            //Utilities.gt.InputStates("red");
         });
     }
 
@@ -155,7 +160,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
                 if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
                 {
                     //print("2");
-                    Utilities.gt.UpdateDisplay();
+                    Utilities.gt.InputStates("black");
                 }
             }
         }
