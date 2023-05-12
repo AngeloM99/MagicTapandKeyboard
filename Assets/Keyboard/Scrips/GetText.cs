@@ -95,6 +95,7 @@ public class GetText : MonoBehaviour
     {
         GetKeyBindingText();
         textUpdate.text += inputString;
+
         SetInputStringColor(States);
     }
 
@@ -186,12 +187,31 @@ public class GetText : MonoBehaviour
             case "red":
                 ColorCode = "<color=#EC1717>";
                 break;            
-            case "black":
-                ColorCode = "<color=#2031C6>";
-                break;
         }
-        modifiedText = modifiedText.Substring(0, lastCharIndex) +
-            ColorCode + modifiedText[lastCharIndex] + "</color>";
+        if (modifiedText[lastCharIndex].ToString() != ">")
+        {
+            modifiedText = modifiedText.Substring(0, lastCharIndex) + ColorCode + inputString + "</color>";
+        }
+        else if (modifiedText[lastCharIndex] == '>')
+        {
+            modifiedText = modifiedText.Substring(0, modifiedText.Length - 24) + ColorCode + inputString + "</color>";
+        }
+
         textUpdate.text = modifiedText;
+    }
+
+    public void CommitToInput()
+    {
+        string modifiedText = textUpdate.text;
+        modifiedText = modifiedText.Substring(0, modifiedText.Length - 24) + inputString;
+        textUpdate.text = modifiedText;
+    }
+
+    public void DestroyTempText()
+    {
+        if (textUpdate.text.Length > 0)
+        {
+            textUpdate.text = textUpdate.text.Substring(0, textUpdate.text.Length - 24);
+        }
     }
 }

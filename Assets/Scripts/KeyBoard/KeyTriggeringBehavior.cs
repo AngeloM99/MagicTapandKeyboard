@@ -37,6 +37,7 @@ public class KeyboardUtilities
 [Serializable]
 public class TextInputUtilities
 {
+    public GameObject Placeholder;
     public TextMeshProUGUI InputTextField;
     [SerializeField]
     public string InputText;
@@ -68,6 +69,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
     [Space()]
     public bool init = false;
+    public bool keyTriggered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -105,6 +107,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
         Utilities.acce.HesEvent.AddListener(() =>
         {
             Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
+            Utilities.gt.DestroyTempText();
         });
         Utilities.cp.ExitEvent.AddListener(OnExit);
 
@@ -118,7 +121,6 @@ public class KeyTriggeringBehavior : MonoBehaviour
         {
             print("InCancalZone");
             Hp.HintPlaneMaterial.SetFloat("_FP", Hp.HintPlaneActivePower);
-            //Utilities.gt.InputStates("red");
         });
     }
 
@@ -137,6 +139,12 @@ public class KeyTriggeringBehavior : MonoBehaviour
         //}
         #endregion
         Attributes.ButtonRenderer.material = VisualFeedback.ActiveMaterial;
+        if (init == false)
+        {
+            TextInput.Placeholder.SetActive(false);
+            init = true;
+        }
+        Utilities.gt.InputStates("grey");
     }
 
     public void OnOut()
@@ -160,9 +168,14 @@ public class KeyTriggeringBehavior : MonoBehaviour
                 if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
                 {
                     //print("2");
-                    Utilities.gt.InputStates("black");
+                    Utilities.gt.CommitToInput();
+                    keyTriggered = true;
                 }
             }
+        }
+        else
+        {
+            Utilities.gt.DestroyTempText();
         }
 
         Hp.HintPlane.SetActive(false);
