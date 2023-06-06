@@ -9,11 +9,5 @@ Only a few functions from AcceStimulate.cs are inherited in the MagicTap keyboar
 All the actual implementation of behaviors in the MagicTap keyboard is written in the KeyTriggeringBehavior.cs file. This file utilizes the power of UnityEvent to define and handle various functionalities.
 
 
-**I will only list relevant Unity Event for the keyboard:**
-### AcceStimulate.cs
-
-
-
-
 
 
