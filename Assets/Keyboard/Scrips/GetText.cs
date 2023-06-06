@@ -209,7 +209,7 @@ public class GetText : MonoBehaviour
 
     public void DestroyTempText()
     {
-        if (textUpdate.text.Length > 0)
+        if (textUpdate.text.Length > 23)
         {
             textUpdate.text = textUpdate.text.Substring(0, textUpdate.text.Length - 24);
         }

@@ -1,20 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.Input;
-using Microsoft.MixedReality.Toolkit.UI;
-using static UnityEngine.UI.CanvasScaler;
 using Microsoft.MixedReality.Toolkit.Utilities;
-using System.Security.AccessControl;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using TMPro;
-using System.Diagnostics;
-using UnityEditor;
-using UnityEngine.Rendering;
-using Microsoft.MixedReality.Toolkit;
-using Facebook.WitAi.Utilities;
-using UnityEngine.UIElements;
 
 public class CrossPlane : MonoBehaviour
 {
@@ -181,7 +168,7 @@ public class CrossPlane : MonoBehaviour
     {
         if (KeyboardBounds.Contains(CurrentFramePos) || KeyboardBounds.Contains(PreviousFramePos))
         {
-            print("In");
+            //print("In");
             OutCancelZoneTrigger.Invoke();
             WithinCancelZone = false;
         }
@@ -230,7 +217,7 @@ public class CrossPlane : MonoBehaviour
         if (CurrentFramePos < 0 && CurrentFramePos < PreviousFramePos && PreviousFramePos > 0)
         {
             //print("Exit");
-            ExitEvent.Invoke();
+            ExitEvent.Invoke(); 
         }
 
     }

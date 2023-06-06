@@ -56,7 +56,7 @@ public class Textinput : MonoBehaviour
         Vector3 cursorPos = Vector3.zero;
         if (cursorPosition > 0)
         {
-            TMP_CharacterInfo charInfo = InputTextFrame.textInfo.characterInfo[cursorPosition -1    ];
+            TMP_CharacterInfo charInfo = InputTextFrame.textInfo.characterInfo[cursorPosition -1];
             cursorPos = new Vector3(charInfo.bottomRight.x+5f, charInfo.topLeft.y-3f, 0f);
         }
 

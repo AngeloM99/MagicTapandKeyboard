@@ -113,58 +113,67 @@ public class KeyTriggeringBehavior : MonoBehaviour
 
         Utilities.cp.OutCancelZoneTrigger.AddListener(() =>
         {
-            print("OutCancelZone");
+            //print("OutCancelZone");
             Hp.HintPlaneMaterial.SetFloat("_FP", Hp.FresnelPower);
         });
 
         Utilities.cp.InCancelZoneTrigger.AddListener(() =>
         {
-            print("InCancalZone");
+            //print("InCancalZone");
             Hp.HintPlaneMaterial.SetFloat("_FP", Hp.HintPlaneActivePower);
         });
     }
 
+    /// <summary>
+    /// On entering defines a series of actions triggering when the line crossing has happened.
+    /// </summary>
     public void OnEntering()
     {
-        #region Archive Code -----   Make Sure Write This in Another Script that can loop through all buttons.
-        //if(init == false)
-        //{
-        //    init = true;
-        //    TextInput.InputTextField.text = " ";
-        //}
-
-        //if(init == true)
-        //{
-        //    Attributes.ButtonRenderer.material = VisualFeedback.ActiveMaterial;
-        //}
-        #endregion
+        // Change visual feedback
         Attributes.ButtonRenderer.material = VisualFeedback.ActiveMaterial;
+        // Turn off placeholder if placeholder is active
         if (init == false)
         {
             TextInput.Placeholder.SetActive(false);
             init = true;
         }
+        // Pre-Entering text
         Utilities.gt.InputStates("grey");
     }
 
+    /// <summary>
+    /// On Out defines a series of actions triggering when out event is triggering but Exit event is not
+    /// </summary>
     public void OnOut()
     {
+        // Set red plane active. 
         if (Utilities.cp.ExitEventTriggered == false)
         {
             Hp.HintPlane.SetActive(true);
         }
     }
 
+    /// <summary>
+    /// On Exit defines a series of actions triggering when Exit Event is triggering
+    /// </summary>
     public void OnExit()
     {
-
+        // Change Visual feedback
         Attributes.ButtonRenderer.material = VisualFeedback.InactiveMaterial;
 
+        // Cancel condition 1: Check when exit, if the finger is within the red cancel zone.
         if (Utilities.cp.WithinCancelZone == false)
         {
+            // Cancel condition 2: Check when exit, if Hes Event has been triggered.
             if (Utilities.cp.HesEventTriggered == false)
             {
                 //print("1");
+                /// Execute condition can only met when:
+                /// 1. You are not in the red zone
+                /// 2. You have not triggered the HesEvent cancel mechanism
+                /// 3. You have both the enter event flag and in event flag set true 
+                /// Explain: You have entered the key bound but not exiting the key bound from 
+                /// other sides so you still have the InEvent set true. 
                 if (Utilities.cp.EnterEventTriggered == true && Utilities.cp.InEventTriggered == true)
                 {
                     //print("2");
@@ -173,6 +182,7 @@ public class KeyTriggeringBehavior : MonoBehaviour
                 }
             }
         }
+        // Destroy pre-entering text. 
         else
         {
             Utilities.gt.DestroyTempText();
