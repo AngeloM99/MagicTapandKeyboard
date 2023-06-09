@@ -29,7 +29,10 @@ public class S1SetVariable : MonoBehaviour
             if (acce != null && sam != null)
             {
                 sam.Acce = acce;
-                sam.Player = t.GetComponentInChildren<S1Player>();
+                if (sam.Player != null)
+                {
+                    sam.Player = t.GetComponentInChildren<S1Player>();
+                }
             }
         }
     }
@@ -52,6 +55,7 @@ public class S1SetVariable : MonoBehaviour
 
     public void SetMode(GameObject root)
     {
+        //print(root);
         AcceStimulate acce;
         acce = root.GetComponent<AcceStimulate>();
         if (acce != null)
