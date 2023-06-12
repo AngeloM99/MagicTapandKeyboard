@@ -169,7 +169,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0.1
@@ -404,7 +405,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0.1
@@ -710,7 +712,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0
   NumberOfBalls: 1
   depthOffset: 0
@@ -796,7 +799,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  TargetPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
   CircleRadius: 0
   NumberOfBalls: 1
   depthOffset: 0
@@ -917,7 +921,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0
@@ -1098,7 +1103,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0
   NumberOfBalls: 1
   depthOffset: 0
@@ -1183,7 +1189,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0
@@ -1225,7 +1232,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.3
   NumberOfBalls: 16
   depthOffset: 0
@@ -1280,7 +1288,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.1
   NumberOfBalls: 9
   depthOffset: 0
@@ -1350,7 +1359,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.05
   NumberOfBalls: 3
   depthOffset: 0
@@ -1512,9 +1522,10 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  ObstaclePrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  TargetPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
   CircleRadius: 0.075
-  NumberOfBalls: 3
+  NumberOfBalls: 7
   depthOffset: 0
   BallSize: 0.04
   ParentObject: {fileID: 1501508430}
@@ -1732,7 +1743,8 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
   TargetList: 
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  ObstaclePrefab: {fileID: 0}
+  TargetPrefab: {fileID: 0}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0.1
@@ -1950,15 +1962,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   TargetObjects: []
-  TargetList: 050000000d000000010000000800000006000000
-  BallPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
+  TargetList: 0f000000030000000b000000080000000100000002000000
+  ObstaclePrefab: {fileID: 8524059368368922056, guid: 258efb093605d32449a127a86ddb400c, type: 3}
+  TargetPrefab: {fileID: 8524059368368922056, guid: 6cc4559a7e768c04aba4a2a7fc4b43ce, type: 3}
   CircleRadius: 0.15
   NumberOfBalls: 16
   depthOffset: 0
   BallSize: 0.04
   ParentObject: {fileID: 1844777600}
   NumofLayers: 1
-  isObstacle: 1
+  isObstacle: 0
 --- !u!4 &1844777602
 Transform:
   m_ObjectHideFlags: 0

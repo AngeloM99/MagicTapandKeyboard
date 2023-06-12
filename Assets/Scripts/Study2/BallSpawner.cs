@@ -1,14 +1,19 @@
+using Microsoft.MixedReality.Toolkit.SceneSystem;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
+
     public Color targetColor;
     public List<GameObject> TargetObjects = new List<GameObject> { };
     public List<int> TargetList = new List<int> { };
 
-    public GameObject BallPrefab;
+    [Header("Prefabs")]
+    public GameObject ObstaclePrefab;
+    public GameObject TargetPrefab;
+
     [Header("Circle Attributes")]
     public float CircleRadius;
     public int NumberOfBalls;
@@ -54,31 +59,46 @@ public class BallSpawner : MonoBehaviour
             float y = transform.position.y + Radius * Mathf.Sin(angle * Mathf.Deg2Rad);
             Vector3 position = new Vector3(x, y, CenterDepthCoordinate);
 
-            GameObject ball = Instantiate(BallPrefab, position, Quaternion.identity);
-            ball.transform.localScale = BallScale;
-            ball.transform.parent = ParentObject.transform;
-
-            Renderer BallRenderer = BallPrefab.GetComponent<Renderer>();
-
-            if (TargetList.Contains(i))
+            if (!isObstacle)
             {
-                TargetObjects.Add(ball);
-                //print(i);
-                Transform IndicatorText = ball.transform.Find("Text (TMP)");
-                GameObject IndicatorTextObject = IndicatorText.gameObject;
-                TextMeshPro text = IndicatorTextObject.GetComponent<TextMeshPro>();
-                IndicatorTextObject.SetActive(true);
-                if (text != null)
+                if (TargetList.Contains(i))
                 {
-                    print("1111");
+                    GameObject Target = Instantiate(TargetPrefab, position, Quaternion.identity);
+                    Target.transform.localScale = BallScale;
+                    Target.transform.parent = ParentObject.transform;
+
+                    TargetObjects.Add(Target);
+                    //print(i);
+                    Transform IndicatorText = Target.transform.Find("Text (TMP)");
+                    GameObject IndicatorTextObject = IndicatorText.gameObject;
+                    TextMeshPro text = IndicatorTextObject.GetComponent<TextMeshPro>();
+                    IndicatorTextObject.SetActive(true);
+                    if (text != null)
+                    {
+                        print("1111");
+                    }
+
+                    text.fontSize = 50;
+
+                    for (int num = 1; num < TargetObjects.Count; num++)
+                    {
+                        text.text = num.ToString();
+                    }
                 }
-
-                text.fontSize = 50;
-
-                for (int num = 0; num < TargetObjects.Count; num++)
+                else if (!TargetList.Contains(i))
                 {
-                    text.text = num.ToString();
+                    GameObject Obstacles = Instantiate(ObstaclePrefab, position, Quaternion.identity);
+                    Obstacles.transform.localScale = BallScale;
+                    Obstacles.transform.parent = ParentObject.transform;
+
+                    Renderer BallRenderer = ObstaclePrefab.GetComponent<Renderer>();
                 }
+            }
+            else
+            {
+                GameObject Obstacles = Instantiate(ObstaclePrefab, position, Quaternion.identity);
+                Obstacles.transform.localScale = BallScale;
+                Obstacles.transform.parent = ParentObject.transform;
             }
         }
     }

@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 181bc42e9f74d6f448cbd404f97bad09, type: 2}
+  - {fileID: 2100000, guid: bea0f8a060ea46b4a95c0e6b716566bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   ac: 0
   Vb: 0
   Vbc: 0.3
-  Ab: -1
+  Ab: -2
   Vupper: 0.3
   HighLighted: 0
   Hesitated: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   Debugger: []
   showDebug: 0
   condition: 0
-  OutMate: {fileID: 2100000, guid: 7bd3cd8b1af1c0b4cb8d2bb05cce33a1, type: 2}
+  OutMate: {fileID: 2100000, guid: 488f4462aaffc6145933d8e6f1ed2dab, type: 2}
   InMate: {fileID: 2100000, guid: af474dea815391b4a9ed471edabeb1ea, type: 2}
   HLMate: {fileID: 0}
   meshRenderer: {fileID: 0}
